@@ -1,0 +1,33 @@
+{
+  "name": "@workspace/chat-ui-components",
+  "version": "0.0.1",
+  "description": "使用Lit构建的Web通用聊天UI组件",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc && vite build",
+    "dev": "vite build --watch"
+  },
+  "author": "tingfeng",
+  "license": "ISC",
+  "dependencies": {
+    "lit": "^3.3.1",
+    "mitt": "^3.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.3",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.7"
+  }
+}

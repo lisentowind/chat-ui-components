@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat UI Components Demo</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+        'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+        'Helvetica Neue', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      transition: background 0.3s ease;
+    }
+
+    body.dark-mode {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    }
+
+    .controls {
+      margin-bottom: 20px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      background: white;
+      color: #333;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn.active {
+      background: #007bff;
+      color: white;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 800px;
+      height: 600px;
+    }
+
+    .info {
+      margin-top: 20px;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 8px;
+      font-size: 14px;
+      line-height: 1.6;
+      max-width: 800px;
+    }
+
+    .info code {
+      background: #f5f5f5;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="controls">
+    <button class="btn active" data-theme="light">亮色主题</button>
+    <button class="btn" data-theme="dark">暗色主题</button>
+    <button class="btn" data-theme="auto">跟随系统</button>
+    <button class="btn" data-theme="custom">自定义主题</button>
+  </div>
+
+  <div class="container">
+    <chat-container id="chat"></chat-container>
+  </div>
+
+  <div class="info">
+    <strong>主题系统说明：</strong><br>
+    • 使用 CSS Variables 实现，支持亮色/暗色主题<br>
+    • 可通过 <code>applyTheme()</code> 切换主题<br>
+    • 可通过 <code>customizeTheme()</code> 自定义任意颜色<br>
+    • 所有主题变量以 <code>--chat-*</code> 命名，用户可在 CSS 中直接覆盖
+  </div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "@workspace/root",
+  "version": "0.0.0",
+  "private": true,
+  "description": "使用Lit构建的Web通用聊天UI组件 Monorepo",
+  "scripts": {
+    "dev": "pnpm --filter @workspace/app dev",
+    "build": "pnpm --filter @workspace/chat-ui-components build",
+    "build:all": "pnpm -r build"
+  },
+  "author": "tingfeng",
+  "license": "ISC",
+  "packageManager": "pnpm@10.25.0"
+}
