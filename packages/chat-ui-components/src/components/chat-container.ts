@@ -1,29 +1,29 @@
-import { LitElement, html, css } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
-import type { Emitter } from 'mitt';
-import type { Message, ChatEvents } from '../types';
-import { createEventBus } from '../event-bus';
-import './chat-message';
-import './chat-input';
+import { LitElement, html, css } from "lit";
+import { customElement, property } from "lit/decorators.js";
+import type { Emitter } from "mitt";
+import type { Message, ChatEvents } from "../types";
+import { createEventBus } from "../event-bus";
+import "./chat-message";
+import "./chat-input";
 
-@customElement('chat-container')
+@customElement("chat-container")
 export class ChatContainer extends LitElement {
   static styles = css`
     :host {
       display: flex;
       flex-direction: column;
       height: 100%;
-      background-color: var(--chat-container-bg, #ffffff);
+      background: var(--chat-container-bg);
       border-radius: 8px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       overflow: hidden;
-      border: 1px solid var(--chat-border, #e0e0e0);
+      border: 1px solid var(--chat-border);
     }
 
     .header {
       padding: 16px;
-      background-color: var(--chat-header-bg, #007bff);
-      color: var(--chat-text-on-primary, #ffffff);
+      background: var(--chat-header-bg);
+      color: var(--chat-text-on-primary);
       font-size: 18px;
       font-weight: bold;
     }
@@ -34,7 +34,7 @@ export class ChatContainer extends LitElement {
       padding: 16px;
       display: flex;
       flex-direction: column;
-      background-color: var(--chat-background, #ffffff);
+      background: var(--chat-background);
     }
 
     .messages::-webkit-scrollbar {
@@ -46,16 +46,16 @@ export class ChatContainer extends LitElement {
     }
 
     .messages::-webkit-scrollbar-thumb {
-      background: var(--chat-input-border, #cccccc);
+      background: var(--chat-input-border);
       border-radius: 3px;
     }
 
     .messages::-webkit-scrollbar-thumb:hover {
-      background: var(--chat-text-secondary, #666666);
+      background: var(--chat-text-secondary);
     }
 
     .footer {
-      border-top: 1px solid var(--chat-divider, #e0e0e0);
+      border-top: 1px solid var(--chat-divider);
     }
   `;
 
@@ -63,7 +63,7 @@ export class ChatContainer extends LitElement {
   messages: Message[] = [];
 
   @property({ type: String })
-  title = '聊天';
+  title = "聊天";
 
   // 事件总线
   public eventBus: Emitter<ChatEvents> = createEventBus();
@@ -71,7 +71,7 @@ export class ChatContainer extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     // 监听 mitt 事件总线的事件
-    this.eventBus.on('send-message', this._handleMessageSent.bind(this));
+    this.eventBus.on("send-message", this._handleMessageSent.bind(this));
   }
 
   disconnectedCallback() {
@@ -82,11 +82,11 @@ export class ChatContainer extends LitElement {
 
   private _handleMessageSent(data: { message: string }) {
     // 向外部触发 mitt 事件
-    this.eventBus.emit('message-sent', data);
-    
+    this.eventBus.emit("message-sent", data);
+
     // 也通过原生 CustomEvent 向上传递,保持向后兼容性
     this.dispatchEvent(
-      new CustomEvent('message-sent', {
+      new CustomEvent("message-sent", {
         detail: data,
         bubbles: true,
         composed: true,

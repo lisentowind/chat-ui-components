@@ -2,14 +2,14 @@ import type { ThemeColors, ThemeMode } from './types';
 
 // 默认亮色主题
 export const defaultLightTheme: Required<ThemeColors> = {
-  // 主色调
-  primary: '#007bff',
-  primaryHover: '#0056b3',
+  // 主色调（使用 Lit-chat 颜色）
+  primary: '#f5a623',
+  primaryHover: '#cb7f16',
 
   // 背景色
   background: '#ffffff',
   containerBackground: '#ffffff',
-  headerBackground: '#007bff',
+  headerBackground: '#f5a623',
 
   // 文字颜色
   textPrimary: '#333333',
@@ -17,7 +17,7 @@ export const defaultLightTheme: Required<ThemeColors> = {
   textOnPrimary: '#ffffff',
 
   // 用户消息气泡
-  userMessageBackground: '#007bff',
+  userMessageBackground: '#f5a623',
   userMessageText: '#ffffff',
 
   // AI 消息气泡
@@ -27,7 +27,7 @@ export const defaultLightTheme: Required<ThemeColors> = {
   // 输入框
   inputBackground: '#ffffff',
   inputBorder: '#cccccc',
-  inputBorderFocus: '#007bff',
+  inputBorderFocus: '#f5a623',
   inputText: '#333333',
   inputPlaceholder: '#999999',
 
@@ -42,14 +42,14 @@ export const defaultLightTheme: Required<ThemeColors> = {
 
 // 默认暗色主题
 export const defaultDarkTheme: Required<ThemeColors> = {
-  // 主色调
-  primary: '#1e88e5',
-  primaryHover: '#1565c0',
+  // 主色调（使用 dark-Lit-chat 颜色）
+  primary: '#f7ba48',
+  primaryHover: '#f9ce71',
 
   // 背景色
   background: '#1a1a1a',
   containerBackground: '#2d2d2d',
-  headerBackground: '#1e88e5',
+  headerBackground: '#f7ba48',
 
   // 文字颜色
   textPrimary: '#e0e0e0',
@@ -57,7 +57,7 @@ export const defaultDarkTheme: Required<ThemeColors> = {
   textOnPrimary: '#ffffff',
 
   // 用户消息气泡
-  userMessageBackground: '#1e88e5',
+  userMessageBackground: '#f7ba48',
   userMessageText: '#ffffff',
 
   // AI 消息气泡
@@ -67,7 +67,7 @@ export const defaultDarkTheme: Required<ThemeColors> = {
   // 输入框
   inputBackground: '#3a3a3a',
   inputBorder: '#4a4a4a',
-  inputBorderFocus: '#1e88e5',
+  inputBorderFocus: '#f7ba48',
   inputText: '#e0e0e0',
   inputPlaceholder: '#888888',
 

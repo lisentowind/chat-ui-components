@@ -7,6 +7,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 export default defineConfig({
+  css: {
+    preprocessorOptions: {
+      less: {
+        javascriptEnabled: true,
+      },
+    },
+  },
   build: {
     emptyOutDir: false, // 不清空输出目录，保留 tsc 生成的类型文件
     terserOptions: {
@@ -24,15 +31,7 @@ export default defineConfig({
       formats: ["es"],
       fileName: "index",
     },
-    rollupOptions: {
-      external: ["lit", "lit/decorators.js", "mitt"],
-      output: {
-        globals: {
-          lit: "Lit",
-          mitt: "mitt",
-        },
-      },
-    },
+    cssCodeSplit: true,
     outDir: "dist",
   },
 });

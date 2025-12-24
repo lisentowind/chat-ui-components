@@ -1,9 +1,9 @@
-import { LitElement, html, css } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
-import type { Emitter } from 'mitt';
-import type { ChatEvents } from '../types';
+import { LitElement, html, css } from "lit";
+import { customElement, property, state } from "lit/decorators.js";
+import type { Emitter } from "mitt";
+import type { ChatEvents } from "../types";
 
-@customElement('chat-input')
+@customElement("chat-input")
 export class ChatInput extends LitElement {
   static styles = css`
     :host {
@@ -14,60 +14,60 @@ export class ChatInput extends LitElement {
       display: flex;
       gap: 8px;
       padding: 16px;
-      border-top: 1px solid var(--chat-divider, #e0e0e0);
-      background-color: var(--chat-input-bg, #ffffff);
+      border-top: 1px solid var(--chat-divider);
+      background: var(--chat-input-bg);
     }
 
     input {
       flex: 1;
       padding: 10px 16px;
-      border: 1px solid var(--chat-input-border, #cccccc);
+      border: 1px solid var(--chat-input-border);
       border-radius: 20px;
       font-size: 14px;
       outline: none;
-      background-color: var(--chat-input-bg, #ffffff);
-      color: var(--chat-input-text, #333333);
+      background: var(--chat-input-bg);
+      color: var(--chat-input-text);
     }
 
     input::placeholder {
-      color: var(--chat-input-placeholder, #999999);
+      color: var(--chat-input-placeholder);
     }
 
     input:focus {
-      border-color: var(--chat-input-border-focus, #007bff);
+      border-color: var(--chat-input-border-focus);
     }
 
     button {
       padding: 10px 24px;
-      background-color: var(--chat-primary, #007bff);
-      color: var(--chat-text-on-primary, #ffffff);
+      background: var(--chat-primary);
+      color: var(--chat-text-on-primary);
       border: none;
       border-radius: 20px;
       cursor: pointer;
       font-size: 14px;
       font-weight: 500;
-      transition: background-color 0.2s ease;
+      transition: background 0.2s ease;
     }
 
     button:hover:not(:disabled) {
-      background-color: var(--chat-primary-hover, #0056b3);
+      background: var(--chat-primary-hover);
     }
 
     button:disabled {
-      background-color: var(--chat-button-disabled-bg, #cccccc);
-      color: var(--chat-button-disabled-text, #888888);
+      background: var(--chat-button-disabled-bg);
+      color: var(--chat-button-disabled-text);
       cursor: not-allowed;
     }
   `;
 
   @property({ type: String })
-  placeholder = '输入消息...';
+  placeholder = "输入消息...";
 
   @property({ attribute: false })
   eventBus?: Emitter<ChatEvents>;
 
   @state()
-  private _value = '';
+  private _value = "";
 
   private _handleInput(e: Event) {
     this._value = (e.target as HTMLInputElement).value;
@@ -77,14 +77,14 @@ export class ChatInput extends LitElement {
     if (this._value.trim()) {
       // 使用 mitt 事件总线触发事件
       if (this.eventBus) {
-        this.eventBus.emit('send-message', { message: this._value });
+        this.eventBus.emit("send-message", { message: this._value });
       }
-      this._value = '';
+      this._value = "";
     }
   }
 
   private _handleKeyPress(e: KeyboardEvent) {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       this._handleSend();
     }
   }

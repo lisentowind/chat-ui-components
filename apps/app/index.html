@@ -22,7 +22,6 @@
       justify-content: center;
       align-items: center;
       padding: 20px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       transition: background 0.3s ease;
     }
 
@@ -84,6 +83,102 @@
       font-family: 'Courier New', monospace;
       font-size: 13px;
     }
+
+    .color-picker-panel {
+      display: none;
+      margin-bottom: 20px;
+      padding: 20px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      max-width: 800px;
+      width: 100%;
+    }
+
+    .color-picker-panel.active {
+      display: block;
+    }
+
+    .color-picker-panel h3 {
+      margin: 0 0 15px 0;
+      font-size: 16px;
+      color: #333;
+    }
+
+    .color-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+
+    .color-item {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .color-item label {
+      font-size: 14px;
+      color: #666;
+      font-weight: 500;
+    }
+
+    .color-input-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .color-input-group input[type="color"] {
+      width: 50px;
+      height: 40px;
+      border: 2px solid #e0e0e0;
+      border-radius: 6px;
+      cursor: pointer;
+      background: transparent;
+    }
+
+    .color-input-group input[type="text"] {
+      flex: 1;
+      padding: 8px 12px;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      font-size: 13px;
+      font-family: 'Courier New', monospace;
+    }
+
+    .preset-colors {
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .preset-colors h4 {
+      margin: 0 0 10px 0;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .preset-list {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .preset-btn {
+      padding: 8px 16px;
+      border: 2px solid transparent;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .preset-btn:hover {
+      transform: scale(1.05);
+      border-color: currentColor;
+    }
   </style>
 </head>
 
@@ -93,6 +188,51 @@
     <button class="btn" data-theme="dark">暗色主题</button>
     <button class="btn" data-theme="auto">跟随系统</button>
     <button class="btn" data-theme="custom">自定义主题</button>
+  </div>
+
+  <div class="color-picker-panel" id="colorPicker">
+    <h3>🎨 自定义主题颜色</h3>
+    <div class="color-options">
+      <div class="color-item">
+        <label>主色调</label>
+        <div class="color-input-group">
+          <input type="color" id="primaryColor" value="#9333ea">
+          <input type="text" id="primaryColorText" value="#9333ea">
+        </div>
+      </div>
+      <div class="color-item">
+        <label>主色调悬停</label>
+        <div class="color-input-group">
+          <input type="color" id="primaryHoverColor" value="#7e22ce">
+          <input type="text" id="primaryHoverColorText" value="#7e22ce">
+        </div>
+      </div>
+      <div class="color-item">
+        <label>用户消息背景</label>
+        <div class="color-input-group">
+          <input type="color" id="userMsgBgColor" value="#9333ea">
+          <input type="text" id="userMsgBgColorText" value="#9333ea">
+        </div>
+      </div>
+      <div class="color-item">
+        <label>AI消息背景</label>
+        <div class="color-input-group">
+          <input type="color" id="assistantMsgBgColor" value="#f3e8ff">
+          <input type="text" id="assistantMsgBgColorText" value="#f3e8ff">
+        </div>
+      </div>
+    </div>
+    <div class="preset-colors">
+      <h4>快速选择预设主题</h4>
+      <div class="preset-list">
+        <button class="preset-btn" data-preset="purple" style="background: #9333ea; color: white;">紫色</button>
+        <button class="preset-btn" data-preset="orange" style="background: #f5a623; color: white;">橙色</button>
+        <button class="preset-btn" data-preset="blue" style="background: #3491fa; color: white;">蓝色</button>
+        <button class="preset-btn" data-preset="green" style="background: #00b42a; color: white;">绿色</button>
+        <button class="preset-btn" data-preset="pink" style="background: #f5319d; color: white;">粉色</button>
+        <button class="preset-btn" data-preset="red" style="background: #f53f3f; color: white;">红色</button>
+      </div>
+    </div>
   </div>
 
   <div class="container">

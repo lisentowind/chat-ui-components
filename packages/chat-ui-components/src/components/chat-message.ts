@@ -1,7 +1,7 @@
-import { LitElement, html, css } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { LitElement, html, css } from "lit";
+import { customElement, property } from "lit/decorators.js";
 
-@customElement('chat-message')
+@customElement("chat-message")
 export class ChatMessage extends LitElement {
   static styles = css`
     :host {
@@ -16,15 +16,15 @@ export class ChatMessage extends LitElement {
     }
 
     .message.user {
-      background-color: var(--chat-user-msg-bg, #007bff);
-      color: var(--chat-user-msg-text, #ffffff);
+      background: var(--chat-user-msg-bg);
+      color: var(--chat-user-msg-text);
       margin-left: auto;
       text-align: right;
     }
 
     .message.assistant {
-      background-color: var(--chat-assistant-msg-bg, #f1f3f5);
-      color: var(--chat-assistant-msg-text, #333333);
+      background: var(--chat-assistant-msg-bg);
+      color: var(--chat-assistant-msg-text);
     }
 
     .sender {
@@ -41,15 +41,15 @@ export class ChatMessage extends LitElement {
   `;
 
   @property({ type: String })
-  sender: 'user' | 'assistant' = 'user';
+  sender: "user" | "assistant" = "user";
 
   @property({ type: String })
-  content = '';
+  content = "";
 
   render() {
     return html`
       <div class="message ${this.sender}">
-        <div class="sender">${this.sender === 'user' ? '你' : 'AI'}</div>
+        <div class="sender">${this.sender === "user" ? "你" : "AI"}</div>
         <div class="content">${this.content}</div>
       </div>
     `;

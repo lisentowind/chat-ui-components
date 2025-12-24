@@ -47,6 +47,110 @@ chatContainer.addEventListener("message-sent", (e: Event) => {
   }, 500);
 });
 
+// 颜色选择器逻辑
+const colorPicker = document.getElementById("colorPicker") as HTMLElement;
+const primaryColorInput = document.getElementById("primaryColor") as HTMLInputElement;
+const primaryColorText = document.getElementById("primaryColorText") as HTMLInputElement;
+const primaryHoverColorInput = document.getElementById("primaryHoverColor") as HTMLInputElement;
+const primaryHoverColorText = document.getElementById("primaryHoverColorText") as HTMLInputElement;
+const userMsgBgColorInput = document.getElementById("userMsgBgColor") as HTMLInputElement;
+const userMsgBgColorText = document.getElementById("userMsgBgColorText") as HTMLInputElement;
+const assistantMsgBgColorInput = document.getElementById("assistantMsgBgColor") as HTMLInputElement;
+const assistantMsgBgColorText = document.getElementById("assistantMsgBgColorText") as HTMLInputElement;
+
+// 预设主题配置
+const presetThemes = {
+  purple: {
+    primary: "#9333ea",
+    primaryHover: "#7e22ce",
+    userMessageBackground: "#9333ea",
+    assistantMessageBackground: "#f3e8ff",
+  },
+  orange: {
+    primary: "#f5a623",
+    primaryHover: "#cb7f16",
+    userMessageBackground: "#f5a623",
+    assistantMessageBackground: "#fff7e8",
+  },
+  blue: {
+    primary: "#3491fa",
+    primaryHover: "#206ccf",
+    userMessageBackground: "#3491fa",
+    assistantMessageBackground: "#e8f7ff",
+  },
+  green: {
+    primary: "#00b42a",
+    primaryHover: "#009a29",
+    userMessageBackground: "#00b42a",
+    assistantMessageBackground: "#e8ffea",
+  },
+  pink: {
+    primary: "#f5319d",
+    primaryHover: "#cb1e83",
+    userMessageBackground: "#f5319d",
+    assistantMessageBackground: "#ffe8f1",
+  },
+  red: {
+    primary: "#f53f3f",
+    primaryHover: "#cb272d",
+    userMessageBackground: "#f53f3f",
+    assistantMessageBackground: "#ffece8",
+  },
+};
+
+// 应用自定义主题
+function applyCustomTheme() {
+  applyTheme(chatContainer, "light");
+  customizeTheme(chatContainer, {
+    primary: primaryColorInput.value,
+    primaryHover: primaryHoverColorInput.value,
+    headerBackground: `linear-gradient(135deg, ${primaryColorInput.value} 0%, ${primaryHoverColorInput.value} 100%)`,
+    userMessageBackground: userMsgBgColorInput.value,
+    assistantMessageBackground: assistantMsgBgColorInput.value,
+    assistantMessageText: "#333333",
+  });
+}
+
+// 同步颜色选择器和文本输入框
+function syncColorInputs(colorInput: HTMLInputElement, textInput: HTMLInputElement) {
+  colorInput.addEventListener("input", () => {
+    textInput.value = colorInput.value;
+    applyCustomTheme();
+  });
+
+  textInput.addEventListener("input", () => {
+    if (/^#[0-9A-Fa-f]{6}$/.test(textInput.value)) {
+      colorInput.value = textInput.value;
+      applyCustomTheme();
+    }
+  });
+}
+
+syncColorInputs(primaryColorInput, primaryColorText);
+syncColorInputs(primaryHoverColorInput, primaryHoverColorText);
+syncColorInputs(userMsgBgColorInput, userMsgBgColorText);
+syncColorInputs(assistantMsgBgColorInput, assistantMsgBgColorText);
+
+// 预设主题按钮点击事件
+const presetButtons = document.querySelectorAll(".preset-btn");
+presetButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const preset = (btn as HTMLElement).getAttribute("data-preset") as keyof typeof presetThemes;
+    const theme = presetThemes[preset];
+
+    primaryColorInput.value = theme.primary;
+    primaryColorText.value = theme.primary;
+    primaryHoverColorInput.value = theme.primaryHover;
+    primaryHoverColorText.value = theme.primaryHover;
+    userMsgBgColorInput.value = theme.userMessageBackground;
+    userMsgBgColorText.value = theme.userMessageBackground;
+    assistantMsgBgColorInput.value = theme.assistantMessageBackground;
+    assistantMsgBgColorText.value = theme.assistantMessageBackground;
+
+    applyCustomTheme();
+  });
+});
+
 // 主题切换逻辑
 const buttons = document.querySelectorAll(".btn[data-theme]");
 let currentTheme: ThemeMode = "light";
@@ -69,24 +173,19 @@ buttons.forEach((button) => {
     }
 
     if (theme === "custom") {
-      // 自定义主题示例：紫色渐变
-      applyTheme(chatContainer, "light");
-      customizeTheme(chatContainer, {
-        primary: "#9333ea",
-        primaryHover: "#7e22ce",
-        headerBackground: "linear-gradient(135deg, #9333ea 0%, #c026d3 100%)",
-        userMessageBackground: "#9333ea",
-        assistantMessageBackground: "#f3e8ff",
-        assistantMessageText: "#6b21a8",
-      });
+      // 显示颜色选择器
+      colorPicker.classList.add("active");
+
+      // 应用自定义主题
+      applyCustomTheme();
 
       // 更新页面背景
-      // document.body.style.background =
-      //   "linear-gradient(135deg, #9333ea 0%, #c026d3 100%)";
       document.body.classList.remove("dark-mode");
 
       currentTheme = "light";
     } else if (theme === "auto") {
+      // 隐藏颜色选择器
+      colorPicker.classList.remove("active");
       // 跟随系统
       const prefersDark = window.matchMedia(
         "(prefers-color-scheme: dark)"
@@ -112,6 +211,9 @@ buttons.forEach((button) => {
 
       currentTheme = "auto";
     } else {
+      // 隐藏颜色选择器
+      colorPicker.classList.remove("active");
+
       // 亮色或暗色主题
       applyTheme(chatContainer, theme);
 
