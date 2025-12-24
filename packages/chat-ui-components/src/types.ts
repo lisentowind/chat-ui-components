@@ -45,6 +45,32 @@ export interface ThemeColors {
   // 按钮
   buttonDisabledBackground?: string;
   buttonDisabledText?: string;
+
+  // 思考过程
+  thinking?: string;
+  thinkingBg?: string;
+
+  // 代码块
+  codeBg?: string;
+  codeBorder?: string;
+
+  // 来源引用
+  sourceBorder?: string;
+  sourceBg?: string;
+
+  // 通知系统
+  "notification-success-bg"?: string;
+  "notification-success-text"?: string;
+  "notification-success-border"?: string;
+  "notification-error-bg"?: string;
+  "notification-error-text"?: string;
+  "notification-error-border"?: string;
+  "notification-warning-bg"?: string;
+  "notification-warning-text"?: string;
+  "notification-warning-border"?: string;
+  "notification-info-bg"?: string;
+  "notification-info-text"?: string;
+  "notification-info-border"?: string;
 }
 
 export type ThemeMode = "light" | "dark" | "auto" | "custom";
